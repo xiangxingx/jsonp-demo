@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <h5>你的账户余额是<span id="amount">&&&amount&&&</span></h5>
+  <button id="button">打钱</button>
+  <script>
+    button.addEventListener('click', function (e) {
+      let script = document.createElement('script')
+      let functionName = 'frank' + parseInt(Math.random() * 10000, 10) // 随机生成函数名
+      window[functionName] = function (result) {
+        if (result === 'success') {
+          amount.innerText = amount.innerText - 0 - 1
+        }
+      }
+      script.src = 'http://jack.com:8002/pay?callback=' + functionName
+      document.body.appendChild(script)
+      script.onload = function (e) {
+        e.currentTarget.remove()
+        delete window[functionName]
+      }
+      script.onerror = function (e) {
+        e.currentTarget.remove()
+        delete window[functionName]
+      }
+    })
+  </script>
+</body>
+
+</html>
